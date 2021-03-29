@@ -12,22 +12,31 @@ const Handle = movable(props => {
 })
 
 export default ({
-    size = 240,
-    count = 4,
+    limit = 240,
     preset = [0.3],
     handleSize = 8,
-    onChange=null
+    children = null,
+    onChange = null
 }) => {
 
+    if(!children) {
+        children = []
+    } else if(!Array.isArray(children)) {
+        children = [children]
+    }
+
+    const count = children.length
+
+
     const [formattedPreset, setFormattedPreset] = useState(formatPreset(preset, count))
-    const [allStyles, setAllStyles] = useState(genStyles(formattedPreset, { handleSize, size }))
+    const [allStyles, setAllStyles] = useState(genStyles(formattedPreset, { handleSize, limit }))
     const [containerSize, setContainerSize] = useState({})
     const [currentIndex, setCurrentIndex] = useState(0)
     const [currentSize, setCurrentSize] = useState(0)
     const [nextSize, setNextSize] = useState(0)
 
     useEffect(() => {
-        setAllStyles(genStyles(formattedPreset, { handleSize, size }))
+        setAllStyles(genStyles(formattedPreset, { handleSize, limit }))
     }, [formattedPreset])
 
     const handleContainer = useRef()
@@ -41,7 +50,7 @@ export default ({
                             key={i}
                             className="react-bucket"
                             style={style}
-                        ></div>
+                        >{children[i] || null}</div>
                     )
                 })
             }

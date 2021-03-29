@@ -30,7 +30,7 @@ export const formatPreset = (preset, count) => {
 }
 
 export const genStyles = (preset, {
-    size = 240,
+    limit = 240,
     handleSize = 8
 }) => {
     const buckets = preset.map(({ size, start }) => ({ width: size * 100 + '%', left: start * 100 + '%' }))
@@ -40,7 +40,7 @@ export const genStyles = (preset, {
         left: start * 100 + '%'
     }))
 
-    const container = { height: size }
+    const container = { height: limit }
 
     return { buckets, handles, container }
 }

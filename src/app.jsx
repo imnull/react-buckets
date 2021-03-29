@@ -15,6 +15,10 @@ export default () => {
             onChange={preset => {
                 setPreset(preset)
             }}
-        />
+        >
+            <div style={{ textAlign: 'center' }}>1</div>
+            <div style={{ textAlign: 'center' }}>2</div>
+            <div style={{ textAlign: 'center' }}>3</div>
+        </Buckets>
     </div>
 }

@@ -1,16 +1,18 @@
 .react-buckets-container {
-    border: 1px solid #000;
+    /* border: 1px solid #000; */
     position: relative;
     user-select: none;
+    overflow: hidden;
 }
 
 .react-buckets-container .react-bucket {
-    border: 1px solid #000;
+    /* border: 1px solid #000; */
     position: absolute;
     top: 0;
     bottom: 0;
     box-sizing: border-box;
     user-select: none;
+    overflow: hidden;
 }
 
 .react-buckets-container .react-buckets-handle-container {
@@ -20,14 +22,16 @@
     right: 0;
     bottom: 0;
     user-select: none;
+    overflow: hidden;
 }
 
 .react-buckets-container .react-buckets-handle-container .react-handle {
     position: absolute;
     top: 0;
     bottom: 0;
-    border: 1px solid #000;
+    background-color: #aaa;
     box-sizing: border-box;
     cursor: ew-resize;
     user-select: none;
+    z-index: 100;
 }

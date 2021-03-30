@@ -12,11 +12,15 @@ const Handle = movable(props => {
 })
 
 export default ({
-    limit = 240,
+    size = 240,
     preset = [0.3],
     handleSize = 8,
+    space = 0,
     children = null,
-    onChange = null
+    onChange = null,
+    handleStyle = null,
+    activeHandleStyle = null,
+    bucketStyle = null,
 }) => {
 
     if(!children) {
@@ -29,15 +33,33 @@ export default ({
 
 
     const [formattedPreset, setFormattedPreset] = useState(formatPreset(preset, count))
-    const [allStyles, setAllStyles] = useState(genStyles(formattedPreset, { handleSize, limit }))
+    const [allStyles, setAllStyles] = useState(genStyles(formattedPreset, {
+        handleSize, size, currentIndex: -1, space,
+        bucketStyle, handleStyle, activeHandleStyle,
+    }))
     const [containerSize, setContainerSize] = useState({})
     const [currentIndex, setCurrentIndex] = useState(0)
     const [currentSize, setCurrentSize] = useState(0)
     const [nextSize, setNextSize] = useState(0)
 
     useEffect(() => {
-        setAllStyles(genStyles(formattedPreset, { handleSize, limit }))
-    }, [formattedPreset])
+        setAllStyles(genStyles(formattedPreset, {
+            handleSize, size, currentIndex, space,
+            bucketStyle, handleStyle, activeHandleStyle,
+        }))
+    }, [formattedPreset, currentIndex])
+
+    const cancelSelectedHandle = (e) => {
+        e.stopPropagation()
+        setCurrentIndex(-1)
+    }
+
+    useEffect(() => {
+        document.addEventListener('mousedown', cancelSelectedHandle)
+        return () => {
+            document.removeEventListener('mousedown', cancelSelectedHandle)
+        }
+    }, [])
 
     const handleContainer = useRef()
 
@@ -72,7 +94,9 @@ export default ({
                                 const { width: size } = containerSize
                                 const coupleSize = (nextSize + currentSize) * size
                                 const coupleRate = coupleSize / size
-                                const newSize = Math.min(coupleSize - handleSize * 2, Math.max(handleSize * 2, currentSize * size + value))
+                                const minSize = currentIndex === 0 ? 0 / 2 : 0
+                                const maxSize = coupleSize - (currentIndex === count - 2 ? 0 / 2 : 0)
+                                const newSize = Math.min(maxSize, Math.max(minSize, currentSize * size + value))
                                 const rate = newSize / size
 
                                 const _preset = [...preset]

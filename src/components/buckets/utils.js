@@ -29,18 +29,45 @@ export const formatPreset = (preset, count) => {
     return output
 }
 
-export const genStyles = (preset, {
-    limit = 240,
-    handleSize = 8
-}) => {
-    const buckets = preset.map(({ size, start }) => ({ width: size * 100 + '%', left: start * 100 + '%' }))
-    const handles = preset.filter((_, i) => i > 0).map(({ start }) => ({
-        width: handleSize,
-        marginLeft: -handleSize / 2 + 'px',
-        left: start * 100 + '%'
-    }))
+const computeStyle = (style, params) => {
+    return (typeof style === 'function' ? style({ ...params }) : style) || null
+}
 
-    const container = { height: limit }
+export const genStyles = (preset, {
+    size = 240,
+    space = 8,
+    handleSize = 8,
+    currentIndex = -1,
+    bucketStyle = null,
+    handleStyle = null,
+    activeHandleStyle = null,
+}) => {
+
+
+
+    const buckets = preset.map(({ size, start }, i, arr) => {
+        const params = { index: i, head: i === 0, tail: i === arr.length - 1 }
+        return {
+            width: size * 100 + '%',
+            left: start * 100 + '%',
+            ...computeStyle(bucketStyle, params),
+            padding: 0,
+            paddingLeft: params.head ? 0 : `${space / 2}px`,
+            paddingRight: params.tail ? 0 : `${space / 2}px`,
+        }
+    })
+    const handles = preset.filter((_, i) => i > 0).map(({ start }, i, arr) => {
+        const params = { index: i, head: i === 0, tail: i === arr.length - 1 }
+        return {
+            width: handleSize,
+            marginLeft: -handleSize / 2 + 'px',
+            left: start * 100 + '%',
+            ...computeStyle(handleStyle, params),
+            ...{ ...(i === currentIndex ? computeStyle(activeHandleStyle, params) : null) }
+        }
+    })
+
+    const container = { height: size }
 
     return { buckets, handles, container }
 }

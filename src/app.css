@@ -1,4 +1,41 @@
+.root-container {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+}
 .container {
     font-size: 18px;
     color: #333;
+    padding: 20px;
+    background-color: #f1f1f1;
+}
+
+.top-menu {
+    background-color: #333;
+    color: #f1f1f1;
+    display: flex;
+    height: 64px;
+    align-items: center;
+    flex: 1;
+    justify-content: start;
+    flex-direction: row;
+}
+
+.top-menu-item {
+    color: #fefefe;
+    text-decoration: none;
+    display: block;
+    padding: 20px 20px;
+    box-sizing: border-box;
+    height: 100%;
+}
+
+.top-menu-item:hover {
+    background-color: #555;
+}
+
+.top-menu-item-active {
+    text-decoration: underline;
 }

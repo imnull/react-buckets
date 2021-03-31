@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
-
-import Buckets from '../../components/buckets'
+import { Buckets } from '../../components'
 
 import './index.css'
 

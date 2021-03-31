@@ -1,7 +1,7 @@
 {
     "name": "react-buckets",
-    "version": "0.0.2",
-    "description": "",
+    "version": "0.0.3",
+    "description": "Some layout or interactive components based React.",
     "main": "dist/index.js",
     "scripts": {
         "dev": "webpack-dev-server --config=cfg/dev.js",
@@ -12,7 +12,7 @@
         "type": "git",
         "url": "git+https://github.com/imnull/react-buckets.git"
     },
-    "keywords": [],
+    "keywords": ["react", "component", "layout"],
     "dependencies": {
         "react": "^17.0.1",
         "react-dom": "^17.0.1",

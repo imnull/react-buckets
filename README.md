@@ -41,19 +41,19 @@ export default ({ preset = [] }) => {
 
 ```
 
-### size<number>
+### size [number]
 
 The layout container height.
 
-### space<number>
+### space [number]
 
 The space size between each bucket.
 
-### handleSize<number>
+### handleSize [number]
 
 The width of then resizing handle.
 
-### bucketStyle<Object | Function>
+### bucketStyle [Object | Function]
 
 Define the custom style of the buckets. It could be a standard css-object, or a callback function like
 
@@ -79,18 +79,18 @@ The argument structure of the callback function means
 - head: `index === 0`
 - tail: `index === elements.length - 1`
 
-### handleStyle<Object | Function>
+### handleStyle [Object | Function]
 
 Define the custom style of the handles. 
 
 Take a look at `bucketStyle`.
 
-### activeHandleStyle<Object | Function>
+### activeHandleStyle [Object | Function]
 
 Define the custom style of the operating handle. 
 
 Take a look at `bucketStyle`.
 
-### onChange<Function>
+### onChange [Function]
 
 Define the callback function invoked when the operation is end.

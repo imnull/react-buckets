@@ -7,7 +7,7 @@ const devtool = 'source-map'
 const entry = { app: path.resolve(__dirname, '../src/index.js') }
 const output = {
     filename: '[name].[contenthash:4].js',
-    path: path.resolve(__dirname, '../build'),
+    path: path.resolve(__dirname, '../demo'),
 }
 const plugins = [
     new CleanWebpackPlugin({}),
